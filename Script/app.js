@@ -44,10 +44,10 @@ document.addEventListener('keydown', movePlayer)
 // 03 - Create Invaders
 
 let invadersPosition = [
-  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-  11, 12, 20, 21, 22, 23, 24, 25, 26, 27, 28,
-  29, 30, 31, 32, 40, 41, 42, 43, 44, 45, 46,
-  47, 48, 49, 50, 51, 52, 60, 61, 62, 63, 64, 65,
+  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+  20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+  31, 32, 40, 41, 42, 43, 44, 45, 46, 47, 48,
+  49, 50, 51, 52, 60, 61, 62, 63, 64, 65,
   66, 67, 68, 69, 70, 71, 72
 ]
 
@@ -74,7 +74,6 @@ function moveInvadersLeft() {
     invadersPosition[i] -= 1
   })
 }
-
 function moveInvaders() {
   const leftEdge = invadersPosition[0] % width === 0
   const rightEdge = invadersPosition[invadersPosition.length - 1] % width === width - 1
@@ -99,29 +98,29 @@ function moveInvaders() {
   }
   addInvaders()
 }
-// setInterval(moveInvaders, 300)
-
-
+setInterval(moveInvaders, 300)
 
 //  05 - Shoot lasers
 
-function attack(event) {
+function attack (event) {
   let laserCurrentPosition = playerPosition
-  function moveLaser() {
-    if (event.key === 'h') {
-      cells[laserCurrentPosition].classList.remove("lasers")
-      laserCurrentPosition -= width
-      cells[laserCurrentPosition].classList.add("lasers")
-    }
-    if (cells[laserCurrentPosition].classList.contains("invaders")) {
-      cells[laserCurrentPosition].classList.remove("invaders")
-      cells[laserCurrentPosition].classList.remove("lasers")
-      clearTimeout(laserBeam)
-    }
-    const laserBeam = setTimeout(moveLaser, 100)
-  }
-  moveLaser()
-}
-document.addEventListener('keydown', attack)
+  if (event.key === "h") {
+    const laserBeam = setInterval(() => {
+      if (event.key === 'h') {
+        cells[laserCurrentPosition].classList.remove("lasers")
+        laserCurrentPosition -= width
+        cells[laserCurrentPosition].classList.add("lasers")
+      }
 
-// 06 - Remove Invaders
+      if (cells[laserCurrentPosition].classList.contains('invaders')) {
+        cells[laserCurrentPosition].classList.remove('lasers', 'invaders')
+        clearInterval(laserBeam)
+        const newInvadersPosition = invadersPosition.indexOf(laserCurrentPosition)
+        invadersPosition.splice(newInvadersPosition, 1)
+
+      }
+    }, 100)
+  }
+}
+
+document.addEventListener('keydown', attack)
