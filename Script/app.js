@@ -113,41 +113,41 @@ function moveInvaders() {
     } 
   }
 }
-const invadersInverval = setInterval(moveInvaders, 50)
+const invadersInverval = setInterval(moveInvaders, 300)
 
 // Invaders attack
-
-// function invadersAttack() {
-//   let bombIndex = invadersPosition[Math.floor(Math.random() * (invadersPosition.length - 1))]
-//   cells[bombIndex].classList.remove("bomb")
-//   cells[bombIndex] += width
-//   cells[bombIndex].classList.add("bomb")
-// }
-// setInterval(invadersAttack, 50)
 
 function invadersAttack(bombIndex){
   let invaderBombIndex = bombIndex += width
   let invaderBomb = cells[invaderBombIndex]
+
   const bombInterval = setInterval(() => {
     if (invaderBomb) {
       invaderBomb.classList.remove('bomb')
     }
-
-    if (invaderBombIndex + width >= width ** 2) {
+    if (invaderBombIndex >= cells.length) {
       clearInterval(bombInterval)
-    } else if (invaderBomb) {
+    } 
+    else if (invaderBomb) {
       invaderBombIndex += width
       invaderBomb = cells[invaderBombIndex]
       invaderBomb.classList.add('bomb')
     }
-  }, 50)
+    if (invaderBomb.classList.contains('player')){
+      console.log('GAME OVER')
+      clearInterval(invadersInverval)
+      clearInterval(bombInterval)
+      clearInterval(invaderLaserInterval)
+    }
+  }, 100)
 }
 
 function invaderLaser() {
   const bombIndex = invadersPosition[Math.floor(Math.random() * (invadersPosition.length - 1))]
   invadersAttack(bombIndex)
 }
-setInterval(invaderLaser, 2000)
+let invaderLaserInterval = setInterval(invaderLaser, 1000)
+
 
 //  05 - Shoot lasers
 
@@ -166,7 +166,6 @@ function attack (event) {
         clearInterval(laserBeam)
         const newInvadersPosition = invadersPosition.indexOf(laserCurrentPosition)
         invadersPosition.splice(newInvadersPosition, 1)
-
       }
     }, 100)
   }
