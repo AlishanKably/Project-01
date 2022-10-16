@@ -74,6 +74,9 @@ function moveInvadersLeft() {
     invadersPosition[i] -= 1
   })
 }
+
+
+
 function moveInvaders() {
   const leftEdge = invadersPosition[0] % width === 0
   const rightEdge = invadersPosition[invadersPosition.length - 1] % width === width - 1
@@ -97,8 +100,54 @@ function moveInvaders() {
     moveInvadersLeft()
   }
   addInvaders()
+
+  if (cells[playerPosition].classList.contains('invaders', 'player')) {
+    console.log('GAME OVER')
+    clearInterval(invadersInverval)
+  }
+
+  for (let i = 0; i < invadersPosition.length; i++) {
+    if (invadersPosition[i] === (cells.length - width)) {
+      console.log('GAME OVER')
+      clearInterval(invadersInverval)
+    } 
+  }
 }
-setInterval(moveInvaders, 300)
+const invadersInverval = setInterval(moveInvaders, 50)
+
+// Invaders attack
+
+// function invadersAttack() {
+//   let bombIndex = invadersPosition[Math.floor(Math.random() * (invadersPosition.length - 1))]
+//   cells[bombIndex].classList.remove("bomb")
+//   cells[bombIndex] += width
+//   cells[bombIndex].classList.add("bomb")
+// }
+// setInterval(invadersAttack, 50)
+
+function invadersAttack(bombIndex){
+  let invaderBombIndex = bombIndex += width
+  let invaderBomb = cells[invaderBombIndex]
+  const bombInterval = setInterval(() => {
+    if (invaderBomb) {
+      invaderBomb.classList.remove('bomb')
+    }
+
+    if (invaderBombIndex + width >= width ** 2) {
+      clearInterval(bombInterval)
+    } else if (invaderBomb) {
+      invaderBombIndex += width
+      invaderBomb = cells[invaderBombIndex]
+      invaderBomb.classList.add('bomb')
+    }
+  }, 50)
+}
+
+function invaderLaser() {
+  const bombIndex = invadersPosition[Math.floor(Math.random() * (invadersPosition.length - 1))]
+  invadersAttack(bombIndex)
+}
+setInterval(invaderLaser, 2000)
 
 //  05 - Shoot lasers
 
