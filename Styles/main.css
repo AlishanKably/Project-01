@@ -79,9 +79,9 @@ h1 {
   font-family: 'Silkscreen';
   font-size: 30px;
   color: whitesmoke;
-  padding: 10px
+  padding: 10px;
 }
-
+  
 .contact {
   background-image: url(https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX2381937.jpg);
   background-size:contain;
@@ -104,7 +104,19 @@ h1 {
   font-family: 'Silkscreen';
   font-size: 20px;
   color: whitesmoke;
-  padding: 10px
+  padding: 10px;
+  animation: 1s linear infinite condemned_blink_effect;
+}
+@keyframes condemned_blink_effect {
+  0% {
+    visibility: hidden;
+  }
+  50% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
 }
 
 .restart {
@@ -113,7 +125,7 @@ h1 {
   font-family: 'Silkscreen';
   font-size: 15Px;
   color: whitesmoke;
-  padding: 10px
+  padding: 10px;
 }
 
 .restart:hover {
