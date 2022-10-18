@@ -5,46 +5,117 @@
 body {
   height: 100vh;
   margin: 0;
+  background-image: url(https://chandra.harvard.edu/photo/2009/galactic/galactic_xray.jpg);
+  background-size: cover;
 }
 
 .grid-wrapper {
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-repeat: no-repeat;
+  margin-top: 50px;
 }
 
 .grid {
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  background-image: url(https://media.istockphoto.com/photos/twinkling-star-field-overlay-texture-on-black-background-picture-id938050474?b=1&k=20&m=938050474&s=170667a&w=0&h=D2d9BnYsHXpkidikvqFi1-abDh7doWvatWEpUpzRNJU=);
+  background-size:contain;
   display: flex;
   flex-wrap: wrap;
   height: 100%;
-  height: 700px;
-  width: 700px;
+  height: 600px;
+  width: 600px;
 }
 
 .grid div {
-  border: 1px solid lightgrey;
   height: 5%;
   width: 5%;
 }
 
 .player {
-  background-color: blue;
+  background-image: url(https://w7.pngwing.com/pngs/981/724/png-transparent-spacecraft-free-content-spaceship-spacecraft-airplane-space-thumbnail.png);
+  background-size:contain;
+  background-repeat: no-repeat;
+  background-color: black;
+  background-position: center;
 }
 
 .invaders {
-  background-color: red;
+  background-image: url(http://www.digitiser2000.com/uploads/4/0/6/6/40667199/published/invade_2.jpeg?1519116521);
+  background-size:contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .lasers {
-  background-color: green;
-}
-
-.collision {
-  background-color: yellow;
+  background-image: url(https://media.istockphoto.com/id/529527330/video/red-laser-beam.jpg?s=640x640&k=20&c=9L36uXlga4O8VBAIxL4JyaHExjq_apKPz_GNsrKPmIA=);
+  background-size:contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: rotate(90deg);
 }
 
 .bomb {
-  background-color: black;
+  background-image: url(https://st3.depositphotos.com/16482308/36134/i/450/depositphotos_361346270-stock-photo-shot-firearm-black-background-fiery.jpg);
+  background-size:contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: rotate(270deg);
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+  font-family: 'Silkscreen';
+  font-size: 40px;
+  color: whitesmoke;
+  margin: 0;
+  padding: 20px;
+}
+
+.text {
+  display: flex;
+  justify-content: center;
+  font-family: 'Silkscreen';
+  font-size: 30px;
+  color: whitesmoke;
+  padding: 10px
+}
+
+.contact {
+  background-image: url(https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX2381937.jpg);
+  background-size:contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.scoreboard {
+  display: flex;
+  justify-content: center;
+  font-family: 'Silkscreen';
+  font-size: 20px;
+  color: whitesmoke;
+  padding: 10px
+}
+
+.score {
+  display: flex;
+  justify-content: center;
+  font-family: 'Silkscreen';
+  font-size: 20px;
+  color: whitesmoke;
+  padding: 10px
+}
+
+.restart {
+  display: flex;
+  justify-content: center;
+  font-family: 'Silkscreen';
+  font-size: 15Px;
+  color: whitesmoke;
+  padding: 10px
+}
+
+.restart:hover {
+  cursor: pointer
 }

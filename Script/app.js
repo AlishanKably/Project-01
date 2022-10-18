@@ -1,16 +1,17 @@
-
-
 // 01 - Create grid
 const grid = document.querySelector('.grid')
+const textDisplay = document.querySelector('.text')
+const score = document.querySelector('.score')
 const cells = []
 const width = 20
 const cellCount = width * width
 let goingRight = true
 let direction = 1
+let scoreboard = 0
+const restart = document.querySelector('.restart')
 function createGrid() {
   for (let i = 0; i < cellCount; i++) {
     const div = document.createElement('div')
-    div.textContent = i
     cells.push(div)
     grid.appendChild(div)
   }
@@ -75,8 +76,6 @@ function moveInvadersLeft() {
   })
 }
 
-
-
 function moveInvaders() {
   const leftEdge = invadersPosition[0] % width === 0
   const rightEdge = invadersPosition[invadersPosition.length - 1] % width === width - 1
@@ -102,22 +101,22 @@ function moveInvaders() {
   addInvaders()
 
   if (cells[playerPosition].classList.contains('invaders', 'player')) {
-    console.log('GAME OVER')
+    textDisplay.textContent = 'GAME OVER'
     clearInterval(invadersInverval)
   }
 
   for (let i = 0; i < invadersPosition.length; i++) {
     if (invadersPosition[i] === (cells.length - width)) {
-      console.log('GAME OVER')
+      textDisplay.textContent = 'GAME OVER'
       clearInterval(invadersInverval)
-    } 
+    }
   }
 }
-const invadersInverval = setInterval(moveInvaders, 300)
+let invadersInverval = setInterval(moveInvaders, 300)
 
 // Invaders attack
 
-function invadersAttack(bombIndex){
+function invadersAttack(bombIndex) {
   let invaderBombIndex = bombIndex += width
   let invaderBomb = cells[invaderBombIndex]
 
@@ -127,14 +126,17 @@ function invadersAttack(bombIndex){
     }
     if (invaderBombIndex >= cells.length) {
       clearInterval(bombInterval)
-    } 
+    }
     else if (invaderBomb) {
       invaderBombIndex += width
       invaderBomb = cells[invaderBombIndex]
       invaderBomb.classList.add('bomb')
     }
-    if (invaderBomb.classList.contains('player')){
-      console.log('GAME OVER')
+    if (invaderBomb.classList.contains('player')) {
+      cells[invaderBombIndex].classList.remove('bomb', 'player')
+      cells[invaderBombIndex].classList.add('contact')
+      setTimeout(() => cells[invaderBombIndex].classList.remove('contact'), 100)
+      textDisplay.textContent = 'GAME OVER'
       clearInterval(invadersInverval)
       clearInterval(bombInterval)
       clearInterval(invaderLaserInterval)
@@ -150,9 +152,15 @@ let invaderLaserInterval = setInterval(invaderLaser, 1000)
 
 
 //  05 - Shoot lasers
+function winner() {
+  if (invadersPosition.length === 0) {
+    textDisplay.textContent = 'YOU WIN'
+  }
+}
 
-function attack (event) {
+function attack(event) {
   let laserCurrentPosition = playerPosition
+  
   if (event.key === "h") {
     const laserBeam = setInterval(() => {
       if (event.key === 'h') {
@@ -163,12 +171,23 @@ function attack (event) {
 
       if (cells[laserCurrentPosition].classList.contains('invaders')) {
         cells[laserCurrentPosition].classList.remove('lasers', 'invaders')
+        cells[laserCurrentPosition].classList.add('contact')
+        setTimeout(() => cells[laserCurrentPosition].classList.remove('contact'), 100)
         clearInterval(laserBeam)
         const newInvadersPosition = invadersPosition.indexOf(laserCurrentPosition)
         invadersPosition.splice(newInvadersPosition, 1)
+        score.textContent = scoreboard++
+        winner()
       }
     }, 100)
   }
 }
 
 document.addEventListener('keydown', attack)
+
+// 06 - Restart game
+
+function restartGame() {
+  window.location.reload()
+}
+restart.addEventListener('click', restartGame)
