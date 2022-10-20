@@ -2,13 +2,15 @@
 const grid = document.querySelector('.grid')
 const textDisplay = document.querySelector('.text')
 const score = document.querySelector('.score')
+const restart = document.querySelector('.restart')
 const cells = []
 const width = 20
 const cellCount = width * width
 let goingRight = true
 let direction = 1
 let scoreboard = 0
-const restart = document.querySelector('.restart')
+let isPlayerHit = false
+
 function createGrid() {
   for (let i = 0; i < cellCount; i++) {
     const div = document.createElement('div')
@@ -33,9 +35,9 @@ addPlayer()
 function movePlayer(event) {
   const x = playerPosition % width
   removePlayer()
-  if (event.key === 'd' && x < width - 1) {
+  if (event.key === 'd' && (x < width - 1) && !isPlayerHit) {
     playerPosition++
-  } else if (event.key === 'a' && x > 0) {
+  } else if (event.key === 'a' && (x > 0) && !isPlayerHit) {
     playerPosition--
   }
   addPlayer()
@@ -51,6 +53,7 @@ let invadersPosition = [
   49, 50, 51, 52, 60, 61, 62, 63, 64, 65,
   66, 67, 68, 69, 70, 71, 72
 ]
+
 
 function addInvaders() {
   for (let i = 0; i < invadersPosition.length; i++)
@@ -77,8 +80,20 @@ function moveInvadersLeft() {
 }
 
 function moveInvaders() {
-  const leftEdge = invadersPosition[0] % width === 0
-  const rightEdge = invadersPosition[invadersPosition.length - 1] % width === width - 1
+  function checkLeftEdge() {
+    return invadersPosition.some((invader) => {
+      return invader % width === 0
+    })
+  }
+  const leftEdge = checkLeftEdge()
+  
+  function checkRightEdge() {
+    return invadersPosition.some((invader) => {
+      return invader % width === width - 1
+    })
+  }
+  
+  const rightEdge = checkRightEdge()
   removeInvaders()
   if (rightEdge && goingRight) {
     for (let i = 0; i < invadersPosition.length; i++) {
@@ -135,8 +150,9 @@ function invadersAttack(bombIndex) {
     if (invaderBomb.classList.contains('player')) {
       cells[invaderBombIndex].classList.remove('bomb', 'player')
       cells[invaderBombIndex].classList.add('contact')
-      setTimeout(() => cells[invaderBombIndex].classList.remove('contact'), 100)
+      setTimeout(() => cells[invaderBombIndex].classList.remove('contact'), 500)
       textDisplay.textContent = 'GAME OVER'
+      isPlayerHit = true
       clearInterval(invadersInverval)
       clearInterval(bombInterval)
       clearInterval(invaderLaserInterval)
@@ -160,8 +176,8 @@ function winner() {
 
 function attack(event) {
   let laserCurrentPosition = playerPosition
-  
-  if (event.key === "h") {
+
+  if (event.key === "h" && !isPlayerHit) {
     const laserBeam = setInterval(() => {
       if (event.key === 'h') {
         cells[laserCurrentPosition].classList.remove("lasers")
