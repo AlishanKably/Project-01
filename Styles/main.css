@@ -9,12 +9,33 @@ body {
   background-size: cover;
 }
 
+.container {
+  display: flex;
+  align-items: flex-start;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  margin-right: 200px;
+  font-family: 'Silkscreen';
+  font-size: 20px;
+  color: whitesmoke;
+  background-image: url(https://media.istockphoto.com/photos/twinkling-star-field-overlay-texture-on-black-background-picture-id938050474?b=1&k=20&m=938050474&s=170667a&w=0&h=D2d9BnYsHXpkidikvqFi1-abDh7doWvatWEpUpzRNJU=);
+  background-size:contain;
+  padding: 10px;
+}
+
 .grid-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   background-repeat: no-repeat;
   margin-top: 50px;
+  margin-left: 425px;
+  margin-right: 20px;
+  flex-grow: 1;
 }
 
 .grid {
