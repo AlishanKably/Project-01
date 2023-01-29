@@ -68,7 +68,6 @@ addInvaders()
 //  04 - Move invaders
 
 function moveInvadersRight() {
-
   invadersPosition.forEach((invader, i) => {
     invadersPosition[i] += 1
   })
