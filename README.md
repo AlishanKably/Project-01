@@ -203,7 +203,3 @@ Overall, I believe this project was a promising first step in my portfolio as it
 
 ## Lessons Learnt
 Understanding the logic of how JavaScript behaves and how elements react with eachother. In particular, this project allowed me to experiement working with state, functions and the DOM. Lastly, it allowed me to experiment with basic CSS to transform a page of simple looking blocks to a presentable game that can allow a user to be immersed.
-
-
-
-
