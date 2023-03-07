@@ -1,6 +1,6 @@
 # Project-01
 ## Space Invaders
-### The Brief
+### Description
 
 For my first solo project, I decided to recreate the classic 80's arcade game, Space Invaders.
 
