@@ -12,7 +12,7 @@ The goal of this project was to create an app that fulfilled the following crite
 
 * Render a game in the browser
 * Design logic for winning & visually display which player won
-* Include sepearte HTML/CSS/JavaScript files
+* Include separate HTML/CSS/JavaScript files
 * Stick with KISS (Keep It Simple Stupid) and DRY (Don't Repeat Yourself) principles
 * Use JavaScript for DOM manipulation
 * Deploy your game online, where the rest of the world can access it
@@ -39,12 +39,17 @@ Technologies used to design this game included the following:
 
 ## Planning
 
-The first stage of this project was to plan which elements are required to reach a minimum viable product and decide on which methods would be used to achieve each of these elements. Furthermore, thought was required on how each of these elements were required to change on the screen. Excalidraw was used to sketch different ideas, pseudocode and organise thoughts.
+The first stage of this project was to plan which elements are required to reach a minimum viable product and decide on which methods would be used to achieve each of these elements. Furthermore, thought was required on how each of these elements were required to change on the screen. Excalidraw was used to sketch different ideas, pseudocode and organise thoughts. To ensure an MVP was achieved, time was spent focusing on:
 
-## Methodology
+* The movement of both the player and the invaders.
+* Ability to attack by both the player and the invaders.
+* A win/lose scenario.
+
+## Build Process
 
 ### Step 01
-The project utilised a grid based system, wrapped within a flex-box, by creating an array of cells with HTML divs being added through a 'for' loop with .push and .appendChild, and defining the cell count and width of grid as variables.
+
+For this project, I utilised a grid based system, wrapped within a flex-box, by creating an array of cells with HTML divs being added through a 'for' loop with .push and .appendChild, and defining the cell count and width of grid as variables.
 
 ```
 function createGrid() {
@@ -57,7 +62,8 @@ function createGrid() {
 createGrid()
 ```
 ### Step 02
-The next step was to create a player that was able to move left and right and shoot, however limit the player to crossing boundaries. This was done through creating a class for the player and utilising this in multiple functions by adding and removing the class. Event listeners are used to link these functions to the keyboard.
+
+For the next step, I created a player that was able to move left and right and shoot, however limit the player to crossing boundaries. This was done through creating a class for the player and utilising this in multiple functions by adding and removing the class. Event listeners are used to link these functions to the keyboard.
 
 ```
 function addPlayer() {
@@ -82,11 +88,12 @@ document.addEventListener('keydown', movePlayer)
 ```
 
 ### Step 03
-Following this, the aliens were then created. Similar to the player, a class is created to define which cells contain the aliens which must be able to move in a particular pattern and randomly shoot back at the player. This is done with the use of the ```setInterval```. If the right-most alien in the array moves into the defined right wall, then the move variable for the alien will be re-assigned and will each move one space down and then continue to move left until the left-most alien encounters the defined left wall and the pattern continues until the lower-most alien hits the player on the bottom line where a Game Over sign pops up.
+
+Following this, I created the invaders. Similar to the player, a class is created to define which cells contain the aliens which must be able to move in a particular pattern and randomly shoot back at the player. This is done with the use of the ```setInterval```. If the right-most alien in the array moves into the defined right wall, then the move variable for the alien will be re-assigned and will each move one space down and then continue to move left until the left-most alien encounters the defined left wall and the pattern continues until the lower-most alien hits the player on the bottom line where a Game Over sign pops up.
 
 ## Challenges
 
-The first challenge encountered was moving the aliens in a certain pattern as a unit that each time they collide with an 'x' boundary, they are to move down a cell and then in the opposite 'x' direction. This was overcome by creating functions that checked if a cell containing the alien class was at the left or right edge followed by a series of "if" statements directing the aliens to the right path.
+The first challenge I encountered was moving the aliens in a certain pattern as a unit that each time they collide with an 'x' boundary, they are to move down a cell and then in the opposite 'x' direction. This was overcome by creating functions that checked if a cell containing the alien class was at the left or right edge followed by a series of "if" statements directing the aliens to the right path.
 
 ```
 function moveInvaders() {
@@ -202,4 +209,4 @@ Overall, I believe this project was a promising first step in my portfolio as it
 * Experiment with canvas to create moving animations and backgrounds.
 
 ## Lessons Learnt
-Understanding the logic of how JavaScript behaves and how elements react with eachother. In particular, this project allowed me to experiement working with state, functions and the DOM. Lastly, it allowed me to experiment with basic CSS to transform a page of simple looking blocks to a presentable game that can allow a user to be immersed.
+Understanding the logic of how JavaScript behaves and how elements react with each other. In particular, this project allowed me to experiment working with state, functions and the DOM. Lastly, it allowed me to experiment with basic CSS to transform a page of simple looking blocks to a presentable game that can allow a user to be immersed.
